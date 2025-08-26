@@ -374,83 +374,10 @@ def render_tracking():
     st.info("🚧 This feature is coming soon!")
 
 def render_resume_analyzer():
-    import docx
-    import PyPDF2
 
-    st.title("🕵️‍♂️ Resume vs Job Description Analyzer (Zero Cost)")
-    st.write("Upload your resume and job description (PDF or DOCX). This tool analyzes keyword match without any API.")
+    st.title("🕵️‍♂️ Resume vs Job Description Analyzer")
 
-    def extract_text_from_pdf(uploaded_file):
-        try:
-            reader = PyPDF2.PdfReader(uploaded_file)
-            return "\n".join([page.extract_text() or "" for page in reader.pages])
-        except Exception:
-            return ""
-
-    def extract_text_from_docx(uploaded_file):
-        try:
-            d = docx.Document(uploaded_file)
-            return "\n".join([p.text for p in d.paragraphs if p.text])
-        except Exception:
-            return ""
-
-    def simple_keyword_match_analysis(resume_text, jd_text):
-        stopwords = set(["and", "or", "the", "a", "an", "with", "to", "for", "of", "in", "on", "is", "are", "you", "your"])
-        jd_words = re.findall(r"\b\w+\b", jd_text.lower())
-        jd_keywords = set([w for w in jd_words if w not in stopwords and len(w) > 2])
-        resume_words = set(re.findall(r"\b\w+\b", resume_text.lower()))
-
-        matched = jd_keywords.intersection(resume_words)
-        missing = jd_keywords - resume_words
-        match_percent = int(len(matched) / len(jd_keywords) * 100) if jd_keywords else 0
-
-        feedback = f"Match: {match_percent}%\n\n"
-        if match_percent >= 75:
-            feedback += "✅ Strong match! You should apply.\n"
-        else:
-            feedback += "⚠️ Needs improvement before applying.\n\n"
-            feedback += "Missing or weak skills:\n"
-            for skill in list(missing)[:5]:
-                feedback += f"- {skill}\n"
-            feedback += "\nStep-by-step plan to improve:\n"
-            feedback += "1. Add missing skills as bullet points in your resume.\n"
-            feedback += "2. Use keywords exactly as they appear in the job description.\n"
-            feedback += "3. Rewrite existing bullet points to emphasize relevant skills.\n"
-            feedback += "\nExample bullet points to add:\n"
-            for skill in list(missing)[:3]:
-                feedback += f"- Developed expertise in {skill} to achieve project goals.\n"
-        return feedback
-
-    resume_file = st.file_uploader("📄 Upload your Resume (PDF or DOCX)", type=["pdf", "docx"])
-    jd_file = st.file_uploader("📃 Upload the Job Description (PDF or DOCX)", type=["pdf", "docx"])
-
-    if resume_file and jd_file:
-        resume_text = extract_text_from_pdf(resume_file) if resume_file.name.lower().endswith(".pdf") else extract_text_from_docx(resume_file)
-        jd_text = extract_text_from_pdf(jd_file) if jd_file.name.lower().endswith(".pdf") else extract_text_from_docx(jd_file)
-
-        if not resume_text or not jd_text:
-            st.warning("⚠️ Could not extract text from one or both files. Please check the formats.")
-            return
-
-        if st.button("🔍 Analyze"):
-            with st.spinner("Analyzing..."):
-                feedback = simple_keyword_match_analysis(resume_text, jd_text)
-
-            st.success("✅ Analysis complete!")
-            st.markdown("### 📋 Feedback")
-            st.text_area("", value=feedback, height=400)
-
-            m = re.search(r"Match:\s*(\d{1,3})\s*%", feedback)
-            if m:
-                score = int(m.group(1))
-                st.subheader(f"📊 Match Score: {score}%")
-                st.progress(min(score, 100) / 100)
-                if score >= 75:
-                    st.success("✅ Strong match! You should apply!")
-                else:
-                    st.warning("⚠️ Needs improvement before applying.")
-    else:
-        st.info("👆 Please upload both Resume and Job Description to begin.")
+    st.info("🚧 This feature is coming soon!")
 
 # -----------------------
 # Main
