@@ -6,9 +6,7 @@ This Streamlit app connects (read-only) to your Gmail, detects “application re
 ✅ OAuth is handled entirely in the Streamlit app (no Flask server needed).
 🔒 Uses gmail.readonly scope only.
 
-📸 Demo 
 
-![Job Buddy Demo](assets/demo.gif)
 
 ✨ Features
 
