@@ -151,9 +151,6 @@ Rate-limit aware caching
 
 Issues and pull requests welcome! Please open an issue to discuss larger changes.
 
-📄 License
-
-Choose a license for your repo (MIT is common for apps like this). If you add a LICENSE file, reference it here.
 
 🙌 Credits
 
