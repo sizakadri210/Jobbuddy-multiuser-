@@ -1,4 +1,4 @@
-Job Buddy 1.0 — Gmail-powered Job Application Tracker
+💼Job Buddy 1.0 — Gmail-powered Job Application Tracker
 
 Track and visualize your job applications automatically from your Gmail inbox.
 This Streamlit app connects (read-only) to your Gmail, detects “application received / thank you for applying” emails, and turns them into simple dashboards and trends.
